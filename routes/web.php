@@ -56,13 +56,19 @@ Route::resource('payment', PaymentController::class);
 Route::resource('cart', CartController::class);
 
 // Routes CRUD pour les commandes
+Route::resource('/orders/{orders}', [OrderController::class, 'orders'])->name('order');
 Route::resource('orders', OrderController::class);
-
 // Routes CRUD pour les utilisateurs
 Route::resource('users', UserController::class);
+
 
 // Routes pour les pages d'administration
 Route::get('admin', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/products', [AdminController::class, 'manageProducts'])->name('admin.products.index');
 Route::get('admin/orders', [AdminController::class, 'manageOrders'])->name('admin.orders.index');
 Route::get('admin/users', [AdminController::class, 'manageUsers'])->name('admin.users.index');
+
+//route pour la home page 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+//route pour la page de catégorie
+Route::get('/category/{category}', [CategoryController::class, 'category'])->name('category');

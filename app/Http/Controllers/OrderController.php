@@ -20,6 +20,20 @@ class OrderController extends Controller
         return view('orders.show', compact('order'));
     }
 
+    public function create()
+{
+    
+    return view('orders.create');
+}
+
+public function edit($id)
+{
+    $order = Order::findOrFail($id);
+    return view('orders.edit', compact('order'));
+}
+
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([

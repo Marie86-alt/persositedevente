@@ -1,4 +1,5 @@
-@extends('layouts.app')
+  @extends('layouts.app') {{/*appellera le fichier app.blade.php dans le dossier resources/views/layouts  */}}
+
 
 @section('title', 'Ajouter un Produit')
 
