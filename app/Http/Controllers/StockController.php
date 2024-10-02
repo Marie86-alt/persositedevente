@@ -13,7 +13,7 @@ class StockController extends Controller
     public function index()
     {
         $stocks = Stock::all();
-        return view('stock.index', compact('stocks'));
+        return view('stocks.index', compact('stocks'));
     }
 
     /**
@@ -21,7 +21,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        return view('stock.create');
+        return view('stocks.create');
     }
 
     /**
@@ -29,8 +29,20 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $stock = Stock::create($request->all());
-        return redirect()->route('stock');
+         // Valider les données d'entrée
+    $validated = $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'quantity' => 'required|numeric',
+    ]);
+
+    // Créer le stock avec les données validées
+    Stock::create($validated);
+
+    // Rediriger vers l'index avec un message de succès
+    return redirect()->route('stocks.index')->with('success', 'Stock ajouté avec succès.');
+
+        // $stock = Stock::create($request->all());
+        // return redirect()->route('stocks');
     }
 
     /**
@@ -39,7 +51,7 @@ class StockController extends Controller
     public function show(string $id)
     {
         $stock = Stock::finOrFail($id);
-        return view('stock.show', compact('stock'));
+        return view('stocks.show', compact('stock'));
     }
 
     /**
@@ -48,7 +60,7 @@ class StockController extends Controller
     public function edit(string $id)
     {
         $stock = Stock::findOrFail($id);
-        return view('stock.edit', compact('stock'));
+        return view('stocks.edit', compact('stock'));
     }
 
     /**
@@ -58,7 +70,7 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stock = update($request->all());
-        return redirect()->route ('stock.index');
+        return redirect()->route ('stocks.index');
     }
 
     /**
@@ -68,6 +80,6 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stock->delete();
-        return redirect()->route('stock.index');
+        return redirect()->route('stocks.index');
     }
 }
