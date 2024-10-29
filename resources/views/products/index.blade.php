@@ -31,6 +31,16 @@
                         @method('DELETE')
                         <button type="submit" class="text-red-500">Supprimer</button>
                     </form>
+
+                    <!-- Formulaire d'ajout au panier -->
+                    <form action="{{ route('cart.add') }}" method="POST" class="inline-block ml-2">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="number" name="quantity" value="1" min="1" class="border rounded py-1 px-2 w-16" required>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+                            Ajouter au Panier
+                        </button>
+                    </form>
                 </td>
             </tr>
             @endforeach

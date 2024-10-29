@@ -46,10 +46,18 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // Route pour une catégorie spécifique
     Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
-//});
+    Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+
+    // Routes pour le panier
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
 
 // Routes pour les pages d'administration
-Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::get('products', [AdminController::class, 'manageProducts'])->name('products.index');
     Route::get('orders', [AdminController::class, 'manageOrders'])->name('orders.index');
