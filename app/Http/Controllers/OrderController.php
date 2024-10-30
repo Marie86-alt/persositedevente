@@ -22,9 +22,34 @@ class OrderController extends Controller
 
     public function create()
 {
+    $cartItems = session('cart', []); // On récupère les articles du panier depuis la session
+    $total = collect($cartItems)->sum(fn($item) => $item['price'] * $item['quantity']);
     
     return view('orders.create');
 }
+//
+public function showOrderDetails()
+{
+    $cartItems = session()->get('cart', []);
+    $total = array_sum(array_map(function($item) {
+        return $item['price'] * $item['quantity'];
+    }, $cartItems));
+
+    return view('orders.details', compact('cartItems', 'total'));
+}
+
+public function track()
+{
+    $orders = Order::all(); // On récupère toutes les commandes
+    return view('orders.track', compact('orders'));
+}
+//ou
+//public function track()
+/*{
+    $user = Auth::user(); // Récupère l'utilisateur connecté
+    $orders = $user->orders; // Récupère les commandes de cet utilisateur
+    return view('orders.track', compact('orders'));
+}*/
 
 public function edit($id)
 {

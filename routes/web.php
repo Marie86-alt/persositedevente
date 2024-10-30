@@ -48,12 +48,22 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
     Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
 
+    Route::get('/ordrs/details', [YourController::class, 'showOrderDetails'])->name('orders.details');
+    Route::get('/orders/track', 'OrderController@track')->name('orders.track');
+    //Route::get('/orders/track', 'OrderController@track')->name('orders.track')->middleware('auth');
+    Route::post('/cart/validate', [CartController::class, 'validateCart'])->name('cart.validate');
+    
+
+
+
+
 
     // Routes pour le panier
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
 
 
 // Routes pour les pages d'administration

@@ -60,11 +60,24 @@
             <input type="text" name="amount" id="amount" class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
         </div>
 
-        <!-- Statut -->
+       <!-- Informations de paiement -->
+       <h2 class="text-xl font-semibold mt-6 mb-2">Informations de Paiement</h2>
         <div class="mb-4">
-            <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Statut :</label>
-            <input type="text" name="status" id="status" class="shadow appearance-none border rounded w-1/2 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label for="card_number" class="block font-medium">Numéro de carte :</label>
+            <input type="text" id="card_number" name="card_number" class="w-full border rounded px-3 py-2" required>
         </div>
+
+        <div class="mb-4">
+            <label for="expiry_date" class="block font-medium">Date d'expiration :</label>
+            <input type="text" id="expiry_date" name="expiry_date" class="w-full border rounded px-3 py-2" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="cvv" class="block font-medium">CVV :</label>
+            <input type="text" id="cvv" name="cvv" class="w-full border rounded px-3 py-2" required>
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Valider la Commande</button>
 
         <div class="flex items-center justify-between w-1/2 mt-4">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

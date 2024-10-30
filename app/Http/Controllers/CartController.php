@@ -88,6 +88,43 @@ public function updateSession(Request $request)
     return response()->json(['error' => 'Produit non trouvé dans le panier.'], 404);
 }
 
+public function validateCart(Request $request)
+{
+    // Vérifiez si l'utilisateur est authentifié
+    if (!Auth::check()) {
+        return response()->json(['success' => false, 'message' => 'Vous devez être connecté pour valider votre panier.']);
+    }
+
+    // Récupérer le contenu du panier
+    $cart = session('cart', []);
+
+    // Vérifiez si le panier n'est pas vide
+    if (empty($cart)) {
+        return response()->json(['success' => false, 'message' => 'Votre panier est vide.']);
+    }
+
+    // Créez une nouvelle commande
+    $order = new Order();
+    $order->user_id = Auth::id(); // Associe la commande à l'utilisateur connecté
+    $order->total = array_sum(array_column($cart, 'price')); // Calculer le total (vous pouvez le modifier selon votre logique)
+    $order->status = 'en attente'; // État initial de la commande
+    $order->save();
+
+    // Ajoutez les articles de la commande (selon votre logique)
+    foreach ($cart as $item) {
+        $order->items()->create([ // Assurez-vous que la relation est définie dans le modèle Order
+            'product_id' => $item['id'], // Remplacez par l'identifiant du produit
+            'quantity' => $item['quantity'],
+            'price' => $item['price'],
+        ]);
+    }
+
+    // Videz le panier
+    session()->forget('cart');
+
+    // Retournez une réponse JSON
+    return response()->json(['success' => true, 'message' => 'Votre panier a été validé avec succès !']);
+}
 
     public function update(Request $request, $id)
     {
