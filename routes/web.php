@@ -12,6 +12,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\AdminController;
+use Illuminate\Http\Request;
+
 
 
 
@@ -53,6 +55,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
     //Route::get('/orders/track', 'OrderController@track')->name('orders.track')->middleware('auth');
     Route::post('/cart/validate', [CartController::class, 'validateCart'])->name('cart.validate');
     
+    // Routes pour le paiement
+
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout/success', [PaymentController::class, 'success'])->name('checkout-success');
+    Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout-cancel');
 
 
 

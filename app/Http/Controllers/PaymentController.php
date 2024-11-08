@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Laravel\Cashier\Cashier;
 
 class PaymentController extends Controller
 {
@@ -42,6 +43,28 @@ class PaymentController extends Controller
         // Redirection avec un message de succès
         return redirect()->route('payments.index')->with('success', 'Paiement créé avec succès.');
     }
+
+    public function checkout(Request $request)
+    {
+        $stripePriceId = 'price_1QJ0ejPj6FyTJ61p7z5ycO8Q'; // Remplace par ton ID de prix Stripe.
+        $quantity = 10; // Ajuste la quantité selon les besoins.
+
+        return $request->user()->checkout([$stripePriceId => $quantity], [
+            'success_url' => route('checkout-success'),
+            'cancel_url' => route('checkout-cancel'),
+        ]);
+    }
+    
+    public function success()
+    {
+        return view('payment.success');
+    }
+
+    public function cancel()
+    {
+        return view('payment.cancel');
+    }
+
 
     /**
      * Display the specified resource.

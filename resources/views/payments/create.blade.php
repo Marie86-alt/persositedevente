@@ -64,17 +64,17 @@
        <h2 class="text-xl font-semibold mt-6 mb-2">Informations de Paiement</h2>
         <div class="mb-4">
             <label for="card_number" class="block font-medium">Numéro de carte :</label>
-            <input type="text" id="card_number" name="card_number" class="w-full border rounded px-3 py-2" required>
+            <input type="text" id="card_number" name="card_number" class="w-1/2 border rounded px-3 py-2" required>
         </div>
 
         <div class="mb-4">
             <label for="expiry_date" class="block font-medium">Date d'expiration :</label>
-            <input type="text" id="expiry_date" name="expiry_date" class="w-full border rounded px-3 py-2" required>
+            <input type="text" id="expiry_date" name="expiry_date" class="w-1/2 border rounded px-3 py-2" required>
         </div>
 
         <div class="mb-4">
             <label for="cvv" class="block font-medium">CVV :</label>
-            <input type="text" id="cvv" name="cvv" class="w-full border rounded px-3 py-2" required>
+            <input type="text" id="cvv" name="cvv" class="w-1/2 border rounded px-3 py-2" required>
         </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Valider la Commande</button>
